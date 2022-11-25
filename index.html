@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Círculo de Progresso</title>
+    <style>
+        body{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            background-color: rgb(235, 182, 122);;
+            align-items: center;
+            text-align: center;
+        }
+        input{
+            padding: 15px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            border-radius: 15px;
+            background-color: rgb(255, 223, 163);
+        }
+        button{
+            background-color: orange;
+            border: none;
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .box{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 18px;
+        }
+        .box-circle svg{
+            width: 150px;
+            height: 150px;
+            position: relative;
+        }
+        circle{
+            width: 150%;
+            height: 150%;
+            fill: none;
+            stroke: rgb(235, 182, 122);;
+            stroke-width: 10;
+            transform: translate(5px, 5px);
+            stroke-dasharray: 440;
+            stroke-dashoffset: 440;
+        }
+        circle:nth-child(1){
+            stroke-dashoffset: 0;
+            stroke: rgb(235, 182, 122);
+        }
+        circle:nth-child(2){
+            stroke: orange;
+            transition: stroke-dashoffset 0.8s;
+        }
+        .number{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Círculo de progresso</h1>
+    <input id="numberProgress" type="number" placeholder="Digite um número">
+    <button onclick="go()">Enviar</button>
+    <div class="box">
+        <div class="box-circle">
+            <svg>
+                <circle cx="70" cy="70" r="70" fill="orange"></circle>
+                <circle id="circleProgress" cx="70" cy="70" r="70" fill="orange"></circle>
+            </svg>
+        </div>
+        <div class="number"></div>
+    </div>
+</body>
+<script>
+    function go(){
+        
+        var circle = document.querySelector('#circleProgress');
+        var number = document.querySelector('#numberProgress').value;
+        document.querySelector('.number').innerHTML = number + '%'
+        circle.style.strokeDashoffset = 440 - (440 * number) / 100;
+    }
+</script>
+</html>
